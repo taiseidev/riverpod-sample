@@ -1,8 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final dioProvider = Provider<Dio>((_) {
+part 'app_dio.g.dart';
+
+@riverpod
+Dio dio(DioRef ref) {
   final dio = Dio();
   dio.interceptors.add(LogInterceptor());
   return dio;
-});
+}

@@ -7,7 +7,7 @@ import 'package:riverpod_sample/riverpod/data/remote/app_dio.dart';
 
 part 'posts_data_source.g.dart';
 
-final postsDataSourceProvider = Provider<PostsDataSource>((ref) {
+final postsDataSourceProvider = Provider.autoDispose<PostsDataSource>((ref) {
   return PostsDataSource(
     ref.watch(dioProvider),
   );
