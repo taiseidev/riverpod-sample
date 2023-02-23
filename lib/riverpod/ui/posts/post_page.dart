@@ -4,8 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/post_item.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/posts_view_model.dart';
 
-class PostsPage extends HookConsumerWidget {
-  const PostsPage({super.key});
+class PostPage extends HookConsumerWidget {
+  const PostPage({super.key});
 
   static const primaryColor = Colors.black38;
   static const defaultTag = 'TypeScript';
@@ -28,6 +28,7 @@ class PostsPage extends HookConsumerWidget {
         elevation: 0,
       ),
       body: RefreshIndicator(
+        color: primaryColor,
         onRefresh: () async => ref.invalidate(postsViewModelProvider),
         child: Column(
           children: [

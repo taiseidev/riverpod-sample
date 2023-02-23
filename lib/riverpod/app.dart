@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_sample/riverpod/ui/posts/posts_page.dart';
+import 'package:riverpod_sample/riverpod/ui/posts/post_page.dart';
 
 class QiitaApp extends StatelessWidget {
   const QiitaApp({super.key});
@@ -10,7 +10,7 @@ class QiitaApp extends StatelessWidget {
       title: 'Qiita Client App',
       home: GestureDetector(
         onTap: () => primaryFocus?.unfocus(),
-        child: const PostsPage(),
+        child: const PostPage(),
       ),
     );
   }
