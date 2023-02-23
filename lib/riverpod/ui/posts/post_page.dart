@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/post_item.dart';
-import 'package:riverpod_sample/riverpod/ui/posts/posts_view_model.dart';
+import 'package:riverpod_sample/riverpod/use_case/posts_view_model.dart';
 
 class PostPage extends HookConsumerWidget {
   const PostPage({super.key});
@@ -13,7 +13,7 @@ class PostPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = useTextEditingController(text: defaultTag);
-    final posts = ref.watch(postsViewModelProvider(controller.text));
+    final posts = ref.watch(fetchQiitaPostsProvider(controller.text));
 
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +29,7 @@ class PostPage extends HookConsumerWidget {
       ),
       body: RefreshIndicator(
         color: primaryColor,
-        onRefresh: () async => ref.invalidate(postsViewModelProvider),
+        onRefresh: () async => ref.invalidate(fetchQiitaPostsProvider),
         child: Column(
           children: [
             Padding(
@@ -48,7 +48,7 @@ class PostPage extends HookConsumerWidget {
                       onPressed: () async {
                         if (controller.text.isNotEmpty) {
                           primaryFocus?.unfocus();
-                          ref.invalidate(postsViewModelProvider);
+                          ref.invalidate(fetchQiitaPostsProvider);
                         }
                       },
                       icon: const Icon(Icons.search),

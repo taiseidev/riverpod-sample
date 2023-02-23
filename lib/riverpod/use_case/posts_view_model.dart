@@ -5,10 +5,11 @@ import 'package:riverpod_sample/riverpod/data/repository/posts_repository.dart';
 
 final errorMessageProvider = StateProvider<String>((_) => '');
 
-final postsViewModelProvider =
+final fetchQiitaPostsProvider =
     FutureProvider.family.autoDispose<List<QiitaPost>, String>(
   (ref, value) async {
-    final posts = await ref.read(postsRepositoryProvider).getQiitaPosts(value);
+    final posts =
+        await ref.read(postsRepositoryProvider).fetchQiitaPosts(value);
 
     return posts.when(
       success: (value) => value,
