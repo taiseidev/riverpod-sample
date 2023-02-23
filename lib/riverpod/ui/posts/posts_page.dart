@@ -1,12 +1,10 @@
-// ignore_for_file: unused_result
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/post_item.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/posts_view_model.dart';
 
 final textEditingControllerProvider =
-    Provider.autoDispose((ref) => TextEditingController());
+    Provider.autoDispose((_) => TextEditingController());
 
 class PostsPage extends ConsumerWidget {
   const PostsPage({super.key});
@@ -61,16 +59,16 @@ class PostsPage extends ConsumerWidget {
         title: const Text(
           'Qiita投稿検索アプリ',
           style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+            color: Colors.black38,
+            fontWeight: FontWeight.w800,
           ),
         ),
-        backgroundColor: primaryColor,
+        backgroundColor: Colors.white,
         elevation: 0,
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          ref.refresh(postsViewModelProvider);
+          ref.invalidate(postsViewModelProvider);
         },
         child: Column(
           children: [
@@ -88,7 +86,7 @@ class PostsPage extends ConsumerWidget {
                           ref
                               .read(tagProvider.notifier)
                               .update((state) => state = controller.text);
-                          ref.refresh(postsViewModelProvider);
+                          ref.invalidate(postsViewModelProvider);
                           controller.clear();
                         }
                       },
@@ -109,9 +107,10 @@ class PostsPage extends ConsumerWidget {
                 data: (posts) => ListView.builder(
                   itemCount: posts.length,
                   itemBuilder: (_, index) {
+                    final post = posts[index];
                     return ProviderScope(
                       overrides: [
-                        currentPostProvider.overrideWithValue(posts[index]),
+                        currentPostProvider.overrideWithValue(post),
                       ],
                       child: const PostItem(),
                     );
@@ -128,9 +127,7 @@ class PostsPage extends ConsumerWidget {
                   );
                 },
                 loading: () => const Center(
-                  child: CircularProgressIndicator(
-                    color: primaryColor,
-                  ),
+                  child: CircularProgressIndicator(color: primaryColor),
                 ),
               ),
             ),

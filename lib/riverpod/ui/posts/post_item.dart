@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_sample/riverpod/data/models/qiita_post.dart';
@@ -13,6 +11,7 @@ class PostItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final post = ref.watch(currentPostProvider);
+
     return Card(
       elevation: 4,
       child: ListTile(
@@ -39,7 +38,7 @@ class PostItem extends ConsumerWidget {
                   Icon(
                     Icons.favorite,
                     color: Colors.red[400],
-                    size: 30,
+                    size: 24,
                   ),
                   const SizedBox(
                     width: 8,
@@ -48,7 +47,7 @@ class PostItem extends ConsumerWidget {
                     '${post.likesCount}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontSize: 24,
                     ),
                   ),
                   const SizedBox(
@@ -57,7 +56,7 @@ class PostItem extends ConsumerWidget {
                   const Icon(
                     Icons.bookmark_add,
                     color: Color.fromARGB(255, 167, 156, 119),
-                    size: 30,
+                    size: 24,
                   ),
                   const SizedBox(
                     width: 8,
@@ -66,29 +65,32 @@ class PostItem extends ConsumerWidget {
                     '${post.stocksCount}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 25,
+                      fontSize: 24,
                     ),
                   ),
                 ],
               ),
               Wrap(
                 children: post.tags!
-                    .map((tag) => Padding(
-                          padding: const EdgeInsets.only(left: 4.0),
-                          child: Chip(
-                            // タグ検索でnullが入ることはないのでアンラップ
-                            label: Text(
-                              tag.name!,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                    .map(
+                      (tag) => Padding(
+                        padding: const EdgeInsets.only(left: 2.0),
+                        child: Chip(
+                          label: Text(
+                            tag.name!,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
-                            backgroundColor: Color(
-                              (Random().nextDouble() * 0xFFFFFF).toInt() << 0,
-                            ).withOpacity(1.0),
                           ),
-                        ))
+                          backgroundColor: Colors.black38,
+                          labelPadding:
+                              const EdgeInsets.symmetric(horizontal: 1),
+                          visualDensity: const VisualDensity(
+                              horizontal: 0.0, vertical: -4),
+                        ),
+                      ),
+                    )
                     .toList(),
               ),
             ],
