@@ -7,7 +7,7 @@ import 'package:riverpod_sample/riverpod/ui/posts/posts_view_model.dart';
 class PostsPage extends HookConsumerWidget {
   const PostsPage({super.key});
 
-  static const primaryColor = Color(0xff59bb0c);
+  static const primaryColor = Colors.black38;
   static const defaultTag = 'TypeScript';
 
   @override
@@ -20,7 +20,7 @@ class PostsPage extends HookConsumerWidget {
         title: const Text(
           'Qiita投稿検索アプリ',
           style: TextStyle(
-            color: Colors.black38,
+            color: primaryColor,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -37,6 +37,11 @@ class PostsPage extends HookConsumerWidget {
                 height: 50,
                 child: TextFormField(
                   controller: controller,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                  ),
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       onPressed: () async {
@@ -59,23 +64,39 @@ class PostsPage extends HookConsumerWidget {
             ),
             Expanded(
               child: posts.when(
-                data: (posts) => ListView.builder(
-                  itemCount: posts.length,
-                  itemBuilder: (_, index) {
-                    final post = posts[index];
-                    return ProviderScope(
-                      overrides: [
-                        currentPostProvider.overrideWithValue(post),
-                      ],
-                      child: const PostItem(),
+                data: (posts) {
+                  if (posts.isEmpty) {
+                    return const Center(
+                      child: Text(
+                        '該当なし',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     );
-                  },
-                ),
+                  }
+                  return ListView.builder(
+                    itemCount: posts.length,
+                    itemBuilder: (_, index) {
+                      final post = posts[index];
+                      return ProviderScope(
+                        overrides: [
+                          currentPostProvider.overrideWithValue(post),
+                        ],
+                        child: const PostItem(),
+                      );
+                    },
+                  );
+                },
                 error: (error, stackTrace) {
                   return const Center(
                     child: Text(
                       'エラーが発生しました',
                       style: TextStyle(
+                        fontSize: 15,
+                        color: primaryColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

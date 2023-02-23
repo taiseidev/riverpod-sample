@@ -12,13 +12,7 @@ final postsViewModelProvider =
     return posts.when(
       success: (value) => value,
       failure: (error) {
-        if (error.response == null) {
-          return [];
-        }
-        ref
-            .read(errorMessageProvider.notifier)
-            .update((state) => state = error.response!.statusCode.toString());
-        return [];
+        throw Exception(error.message);
       },
     );
   },
