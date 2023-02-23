@@ -2,13 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_sample/riverpod/data/i_posts_data_source.dart';
 import 'package:riverpod_sample/riverpod/data/models/qiita_post.dart';
 import 'package:riverpod_sample/riverpod/data/models/result.dart';
-import 'package:riverpod_sample/riverpod/data/remote/posts_data_source.dart';
 
-final postsRepositoryProvider =
-    Provider((ref) => PostsRepository(ref.watch(dataSourceProvider)));
+final postsRepositoryProvider = Provider.autoDispose(
+    (ref) => PostsRepository(ref.watch(dataSourceProvider)));
 
 final dataSourceProvider =
-    Provider<IPostsDataSource>((ref) => throw UnimplementedError());
+    Provider.autoDispose<IPostsDataSource>((ref) => throw UnimplementedError());
 
 class PostsRepository {
   PostsRepository(this._dataSource);

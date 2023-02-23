@@ -11,6 +11,8 @@ final postsViewModelProvider = FutureProvider.autoDispose<List<QiitaPost>>(
         .watch(postsRepositoryProvider)
         .getQiitaPosts(ref.watch(tagProvider), 50);
 
+    print(posts);
+
     return posts.when(
       success: (value) => value,
       failure: (error) {
