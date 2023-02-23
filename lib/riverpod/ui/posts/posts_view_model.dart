@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_sample/riverpod/data/models/qiita_post.dart';
 import 'package:riverpod_sample/riverpod/data/repository/posts_repository.dart';
@@ -12,7 +13,10 @@ final postsViewModelProvider =
     return posts.when(
       success: (value) => value,
       failure: (error) {
-        throw Exception(error.message);
+        throw DioError(
+          requestOptions: RequestOptions(path: ''),
+          error: error.response!.statusCode,
+        );
       },
     );
   },

@@ -91,10 +91,10 @@ class PostsPage extends HookConsumerWidget {
                   );
                 },
                 error: (error, stackTrace) {
-                  return const Center(
+                  return Center(
                     child: Text(
-                      'エラーが発生しました',
-                      style: TextStyle(
+                      error.toString(),
+                      style: const TextStyle(
                         fontSize: 15,
                         color: primaryColor,
                         fontWeight: FontWeight.bold,
