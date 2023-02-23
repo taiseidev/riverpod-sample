@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      json_serializable:
+        options:
+          checked: true # どのプロパティでエラーが発生したか確認
+          field_rename: snake

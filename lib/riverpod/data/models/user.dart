@@ -6,8 +6,7 @@ part 'user.g.dart';
 @freezed
 abstract class User with _$User {
   factory User({
-    // ignore: invalid_annotation_target
-    @JsonKey(name: 'profile_image_url') String? profileImageUrl,
+    String? profileImageUrl,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

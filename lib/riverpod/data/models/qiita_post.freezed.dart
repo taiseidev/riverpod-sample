@@ -21,9 +21,7 @@ QiitaPost _$QiitaPostFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$QiitaPost {
   String? get title => throw _privateConstructorUsedError;
-  @JsonKey(name: 'likes_count')
   int? get likesCount => throw _privateConstructorUsedError;
-  @JsonKey(name: 'stocks_count')
   int? get stocksCount => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
@@ -42,8 +40,8 @@ abstract class $QiitaPostCopyWith<$Res> {
   @useResult
   $Res call(
       {String? title,
-      @JsonKey(name: 'likes_count') int? likesCount,
-      @JsonKey(name: 'stocks_count') int? stocksCount,
+      int? likesCount,
+      int? stocksCount,
       User? user,
       String? url,
       List<Tag>? tags});
@@ -121,8 +119,8 @@ abstract class _$$_QiitaPostCopyWith<$Res> implements $QiitaPostCopyWith<$Res> {
   @useResult
   $Res call(
       {String? title,
-      @JsonKey(name: 'likes_count') int? likesCount,
-      @JsonKey(name: 'stocks_count') int? stocksCount,
+      int? likesCount,
+      int? stocksCount,
       User? user,
       String? url,
       List<Tag>? tags});
@@ -183,8 +181,8 @@ class __$$_QiitaPostCopyWithImpl<$Res>
 class _$_QiitaPost implements _QiitaPost {
   _$_QiitaPost(
       {this.title,
-      @JsonKey(name: 'likes_count') this.likesCount,
-      @JsonKey(name: 'stocks_count') this.stocksCount,
+      this.likesCount,
+      this.stocksCount,
       this.user,
       this.url,
       final List<Tag>? tags})
@@ -196,10 +194,8 @@ class _$_QiitaPost implements _QiitaPost {
   @override
   final String? title;
   @override
-  @JsonKey(name: 'likes_count')
   final int? likesCount;
   @override
-  @JsonKey(name: 'stocks_count')
   final int? stocksCount;
   @override
   final User? user;
@@ -257,8 +253,8 @@ class _$_QiitaPost implements _QiitaPost {
 abstract class _QiitaPost implements QiitaPost {
   factory _QiitaPost(
       {final String? title,
-      @JsonKey(name: 'likes_count') final int? likesCount,
-      @JsonKey(name: 'stocks_count') final int? stocksCount,
+      final int? likesCount,
+      final int? stocksCount,
       final User? user,
       final String? url,
       final List<Tag>? tags}) = _$_QiitaPost;
@@ -269,10 +265,8 @@ abstract class _QiitaPost implements QiitaPost {
   @override
   String? get title;
   @override
-  @JsonKey(name: 'likes_count')
   int? get likesCount;
   @override
-  @JsonKey(name: 'stocks_count')
   int? get stocksCount;
   @override
   User? get user;

@@ -20,8 +20,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-// ignore: invalid_annotation_target
-  @JsonKey(name: 'profile_image_url')
   String? get profileImageUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +32,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call({@JsonKey(name: 'profile_image_url') String? profileImageUrl});
+  $Res call({String? profileImageUrl});
 }
 
 /// @nodoc
@@ -67,7 +65,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: 'profile_image_url') String? profileImageUrl});
+  $Res call({String? profileImageUrl});
 }
 
 /// @nodoc
@@ -93,13 +91,11 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 /// @nodoc
 @JsonSerializable()
 class _$_User implements _User {
-  _$_User({@JsonKey(name: 'profile_image_url') this.profileImageUrl});
+  _$_User({this.profileImageUrl});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
-// ignore: invalid_annotation_target
   @override
-  @JsonKey(name: 'profile_image_url')
   final String? profileImageUrl;
 
   @override
@@ -135,14 +131,11 @@ class _$_User implements _User {
 }
 
 abstract class _User implements User {
-  factory _User(
-          {@JsonKey(name: 'profile_image_url') final String? profileImageUrl}) =
-      _$_User;
+  factory _User({final String? profileImageUrl}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
-  @override // ignore: invalid_annotation_target
-  @JsonKey(name: 'profile_image_url')
+  @override
   String? get profileImageUrl;
   @override
   @JsonKey(ignore: true)
