@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/post_item.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/posts_view_model.dart';
 
-final textEditingControllerProvider =
-    Provider.autoDispose((_) => TextEditingController());
-
-class PostsPage extends ConsumerWidget {
+class PostsPage extends HookConsumerWidget {
   const PostsPage({super.key});
 
   static const primaryColor = Color(0xff59bb0c);
@@ -15,7 +13,7 @@ class PostsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final posts = ref.watch(postsViewModelProvider);
-    final controller = ref.watch(textEditingControllerProvider);
+    final controller = useTextEditingController();
 
     Future<void> errorDialog(String title) async {
       showDialog(

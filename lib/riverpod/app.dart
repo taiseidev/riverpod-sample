@@ -9,7 +9,6 @@ class QiitaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Qiita Client App',
       home: GestureDetector(
-        // キーボード外をタップすると閉じる
         onTap: () => primaryFocus?.unfocus(),
         child: const PostsPage(),
       ),
