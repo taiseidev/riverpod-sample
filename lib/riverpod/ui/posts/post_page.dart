@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/post_item.dart';
-import 'package:riverpod_sample/riverpod/use_case/posts_view_model.dart';
+import 'package:riverpod_sample/riverpod/use_case/fetch_qiita_posts.dart';
 
 class PostPage extends HookConsumerWidget {
   const PostPage({super.key});
@@ -91,7 +91,7 @@ class PostPage extends HookConsumerWidget {
                     },
                   );
                 },
-                error: (error, stackTrace) {
+                error: (error, _) {
                   return Center(
                     child: Text(
                       error.toString(),
@@ -113,8 +113,8 @@ class PostPage extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: primaryColor,
-        onPressed: () {
-          showModalBottomSheet(
+        onPressed: () async {
+          await showModalBottomSheet(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
