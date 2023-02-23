@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_sample/riverpod/app.dart';
+import 'package:riverpod_sample/riverpod/data/i_posts_data_source.dart';
 import 'package:riverpod_sample/riverpod/data/remote/posts_data_source.dart';
-import 'package:riverpod_sample/riverpod/data/repository/posts_repository.dart';
+
+final dataSourceProvider =
+    Provider.autoDispose<IPostsDataSource>((ref) => throw UnimplementedError());
 
 void main() {
   runApp(

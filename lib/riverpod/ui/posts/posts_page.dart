@@ -110,6 +110,19 @@ class PostsPage extends HookConsumerWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryColor,
+        onPressed: () {
+          showModalBottomSheet(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            context: context,
+            builder: (context) => Container(),
+          );
+        },
+        child: const Icon(Icons.question_mark),
+      ),
     );
   }
 }
