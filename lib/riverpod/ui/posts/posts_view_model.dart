@@ -3,19 +3,18 @@ import 'package:riverpod_sample/riverpod/data/models/qiita_post.dart';
 import 'package:riverpod_sample/riverpod/data/repository/posts_repository.dart';
 
 final errorMessageProvider = StateProvider<String>((_) => '');
-final tagProvider = StateProvider<String>((_) => 'Flutter');
 
-final postsViewModelProvider = FutureProvider.autoDispose<List<QiitaPost>>(
-  (ref) async {
-    final posts = await ref
-        .watch(postsRepositoryProvider)
-        .getQiitaPosts(ref.watch(tagProvider), 50);
-
-    print(posts);
+final postsViewModelProvider =
+    FutureProvider.family.autoDispose<List<QiitaPost>, String>(
+  (ref, value) async {
+    final posts = await ref.read(postsRepositoryProvider).getQiitaPosts(value);
 
     return posts.when(
       success: (value) => value,
       failure: (error) {
+        if (error.response == null) {
+          return [];
+        }
         ref
             .read(errorMessageProvider.notifier)
             .update((state) => state = error.response!.statusCode.toString());

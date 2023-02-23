@@ -12,45 +12,8 @@ class PostsPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final posts = ref.watch(postsViewModelProvider);
-    final controller = useTextEditingController();
-
-    Future<void> errorDialog(String title) async {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            actions: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: primaryColor,
-                ),
-                child: const Text("閉じる"),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    ref.listen<String>(
-      errorMessageProvider,
-      ((previous, next) {
-        if (next == '403') {
-          errorDialog('検索できないよ😡');
-        }
-        if (next == '404') {
-          errorDialog('投稿が見つかりません😢');
-        }
-      }),
-    );
+    final controller = useTextEditingController(text: defaultTag);
+    final posts = ref.watch(postsViewModelProvider(controller.text));
 
     return Scaffold(
       appBar: AppBar(
@@ -65,9 +28,7 @@ class PostsPage extends HookConsumerWidget {
         elevation: 0,
       ),
       body: RefreshIndicator(
-        onRefresh: () async {
-          ref.invalidate(postsViewModelProvider);
-        },
+        onRefresh: () async => ref.invalidate(postsViewModelProvider),
         child: Column(
           children: [
             Padding(
@@ -81,11 +42,7 @@ class PostsPage extends HookConsumerWidget {
                       onPressed: () async {
                         if (controller.text.isNotEmpty) {
                           primaryFocus?.unfocus();
-                          ref
-                              .read(tagProvider.notifier)
-                              .update((state) => state = controller.text);
                           ref.invalidate(postsViewModelProvider);
-                          controller.clear();
                         }
                       },
                       icon: const Icon(Icons.search),

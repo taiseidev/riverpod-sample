@@ -16,11 +16,7 @@ class PostsRepository {
 
   static const defaultPostCount = 50;
 
-  @override
-  Future<Result<List<QiitaPost>>> getQiitaPosts(
-    String tag,
-    int defaultPostCount,
-  ) {
+  Future<Result<List<QiitaPost>>> getQiitaPosts(String tag) {
     return _dataSource
         .getQiitaPosts(tag, defaultPostCount)
         .then((articles) => Result<List<QiitaPost>>.success(articles))
