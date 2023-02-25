@@ -11,7 +11,6 @@ class PostItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final post = ref.watch(currentPostProvider);
-
     return Card(
       elevation: 4,
       child: ListTile(
