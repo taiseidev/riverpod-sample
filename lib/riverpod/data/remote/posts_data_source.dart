@@ -21,5 +21,6 @@ abstract class PostsDataSource implements IPostsDataSource {
   @GET("/tags/{tag}/items")
   Future<List<QiitaPost>> getQiitaPosts(
     @Path("tag") String tag,
+    @Query("page") int page,
   );
 }

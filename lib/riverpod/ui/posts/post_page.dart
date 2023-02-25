@@ -15,8 +15,14 @@ class PostPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ページング用
+    final page = useState(1);
+
     final controller = useTextEditingController(text: defaultTag);
-    final posts = ref.watch(fetchQiitaPostsProvider(controller.text));
+
+    final posts = ref.watch(
+      fetchQiitaPostsProvider(tag: controller.text, page: page.value),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -33,6 +39,7 @@ class PostPage extends HookConsumerWidget {
       body: RefreshIndicator(
         color: primaryColor,
         onRefresh: () async {
+          page.value = page.value++;
           await Future<void>.delayed(const Duration(seconds: 1));
           ref.invalidate(fetchQiitaPostsProvider);
         },
