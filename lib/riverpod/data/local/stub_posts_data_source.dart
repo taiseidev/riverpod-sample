@@ -11,7 +11,7 @@ final stubPostsDataSourceProvider = Provider<StubPostsDataSource>((ref) {
 
 class StubPostsDataSource implements IPostsDataSource {
   @override
-  Future<List<QiitaPost>> getQiitaPosts(String tag, int perPage) async {
+  Future<List<QiitaPost>> getQiitaPosts(String tag) async {
     final content =
         json.decode(await rootBundle.loadString('assets/stub/stub_data.json'))
             as Iterable;

@@ -21,12 +21,9 @@ class _PostsDataSource implements PostsDataSource {
   String? baseUrl;
 
   @override
-  Future<List<QiitaPost>> getQiitaPosts(
-    tag,
-    perPage,
-  ) async {
+  Future<List<QiitaPost>> getQiitaPosts(tag) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'per_page': perPage};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result =

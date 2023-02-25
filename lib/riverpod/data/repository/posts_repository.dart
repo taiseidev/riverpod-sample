@@ -13,11 +13,9 @@ class PostsRepository {
 
   final IPostsDataSource _dataSource;
 
-  static const defaultPostCount = 50;
-
   Future<Result<List<QiitaPost>>> fetchQiitaPosts(String tag) {
     return _dataSource
-        .getQiitaPosts(tag, defaultPostCount)
+        .getQiitaPosts(tag)
         .then((articles) => Result<List<QiitaPost>>.success(articles))
         .catchError((error) => Result<List<QiitaPost>>.failure(error));
   }
