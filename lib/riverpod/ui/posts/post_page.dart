@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod_sample/riverpod/ui/posts/post_detail_page.dart';
 import 'package:riverpod_sample/riverpod/ui/posts/post_item.dart';
 import 'package:riverpod_sample/riverpod/use_case/fetch_qiita_posts.dart';
 
@@ -96,7 +97,15 @@ class PostPage extends HookConsumerWidget {
                         overrides: [
                           currentPostProvider.overrideWithValue(post),
                         ],
-                        child: const PostItem(),
+                        child: GestureDetector(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostDetailPage(post),
+                            ),
+                          ),
+                          child: const PostItem(),
+                        ),
                       );
                     },
                   );
