@@ -10,7 +10,7 @@ class QiitaApp extends StatelessWidget {
       title: 'Qiita Client App',
       home: GestureDetector(
         onTap: () => primaryFocus?.unfocus(),
-        child: const PostPage(),
+        child: PostPage(),
       ),
     );
   }

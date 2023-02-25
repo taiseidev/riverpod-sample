@@ -5,10 +5,12 @@ import 'package:riverpod_sample/riverpod/ui/posts/post_item.dart';
 import 'package:riverpod_sample/riverpod/use_case/fetch_qiita_posts.dart';
 
 class PostPage extends HookConsumerWidget {
-  const PostPage({super.key});
+  PostPage({super.key});
 
   static const primaryColor = Colors.black38;
   static const defaultTag = 'TypeScript';
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,35 +31,43 @@ class PostPage extends HookConsumerWidget {
       ),
       body: RefreshIndicator(
         color: primaryColor,
-        onRefresh: () async => ref.invalidate(fetchQiitaPostsProvider),
+        onRefresh: () async {
+          await Future<void>.delayed(const Duration(seconds: 1));
+          ref.invalidate(fetchQiitaPostsProvider);
+        },
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
                 height: 50,
-                child: TextFormField(
-                  controller: controller,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: primaryColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      onPressed: () async {
-                        if (controller.text.isNotEmpty) {
-                          primaryFocus?.unfocus();
-                          ref.invalidate(fetchQiitaPostsProvider);
-                        }
-                      },
-                      icon: const Icon(Icons.search),
+                child: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    controller: controller,
+                    validator: (value) =>
+                        value == null || value.isEmpty ? '入力してください' : null,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
                     ),
-                    filled: true,
-                    fillColor: Colors.grey.shade200,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide.none,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            primaryFocus?.unfocus();
+                            ref.invalidate(fetchQiitaPostsProvider);
+                          }
+                        },
+                        icon: const Icon(Icons.search),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey.shade200,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none,
+                      ),
                     ),
                   ),
                 ),
