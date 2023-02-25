@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_sample/main.dart';
-import 'package:riverpod_sample/riverpod/data/i_posts_data_source.dart';
+import 'package:riverpod_sample/riverpod/repository/i_posts_data_source.dart';
 import 'package:riverpod_sample/riverpod/data/models/qiita_post.dart';
 import 'package:riverpod_sample/riverpod/data/models/result.dart';
 

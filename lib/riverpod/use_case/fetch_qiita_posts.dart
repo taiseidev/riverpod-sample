@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_sample/riverpod/data/models/qiita_post.dart';
-import 'package:riverpod_sample/riverpod/data/repository/posts_repository.dart';
+import 'package:riverpod_sample/riverpod/repository/posts_repository.dart';
 
 final fetchQiitaPostsProvider =
     FutureProvider.family.autoDispose<List<QiitaPost>, String>(
