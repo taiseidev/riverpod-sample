@@ -16,7 +16,7 @@ class PostPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // ページング用
-    final page = useState(1);
+    final page = useState(5);
 
     final controller = useTextEditingController(text: defaultTag);
 

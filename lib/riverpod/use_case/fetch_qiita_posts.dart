@@ -11,6 +11,11 @@ Future<List<QiitaPost>> fetchQiitaPosts(
   required String tag,
   required int page,
 }) async {
+  final cancelToken = CancelToken();
+  ref.onDispose(cancelToken.cancel);
+
+  await Future<void>.delayed(const Duration(milliseconds: 250));
+
   final posts =
       await ref.read(postsRepositoryProvider).fetchQiitaPosts(tag, page);
 
