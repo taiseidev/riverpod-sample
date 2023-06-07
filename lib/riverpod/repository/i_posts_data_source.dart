@@ -1,5 +1,5 @@
-import 'package:riverpod_sample/riverpod/data/models/qiita_post.dart';
+// import 'package:riverpod_sample/riverpod/data/models/qiita_post.dart';
 
-abstract class IPostsDataSource {
-  Future<List<QiitaPost>> getQiitaPosts(String tag, int page);
-}
+// abstract class IPostsDataSource {
+//   Future<List<QiitaPost>> getQiitaPosts(String tag, int page);
+// }
